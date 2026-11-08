@@ -141,18 +141,16 @@ SQLite is the proposed initial local event-storage solution.
 
 ## 8. Failure Handling
 
-The architecture must consider:
+For NODUS v0.1, the following failure behavior is required:
 
-- Agent instrumentation failures.
-- Missing or incomplete telemetry.
-- Event correlation failures.
-- Policy engine failures.
-- Monitoring process termination.
-- Insufficient operating-system permissions.
+- **Policy engine unavailable:** Deny new protected operations.
+- **Agent instrumentation unavailable:** Do not treat agent requests as trusted.
+- **Telemetry collector unavailable:** Raise a monitoring-health alert.
+- **Correlation failure:** Preserve events with an uncorrelated status.
+- **Enforcement mechanism unavailable:** Stop the controlled agent session.
+- **NODUS monitoring process terminates:** Existing OS-level restrictions must remain active.
 
-Security-critical operations must not silently become unrestricted when monitoring or enforcement fails.
-
-The initial implementation will define explicit failure behavior for each enforcement mechanism.
+The agent must never gain unrestricted access merely because a NODUS component fails.
 
 ## 9. Future Extensions
 

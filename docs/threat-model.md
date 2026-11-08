@@ -156,9 +156,21 @@ The initial prototype will not attempt to:
 
 ## 11. Security Requirements
 
-The following requirements will guide implementation and testing.
+The following requirements define the minimum security capabilities for NODUS v0.1.
 
 | ID | Requirement |
 |---|---|
-| N-01 | Record relevant agent tool invocations. |
-| N-02
+| N-01 | Record relevant agent tool invocations with unique operation identifiers. |
+| N-02 | Monitor process execution and relevant parent-child process relationships. |
+| N-03 | Restrict agent filesystem access to explicitly authorized resources using OS-enforced controls. |
+| N-04 | Restrict process execution to explicitly authorized operations where technically enforceable. |
+| N-05 | Restrict outbound network connections to explicitly authorized destinations. |
+| N-06 | Correlate agent operations with observed OS activity using operation identifiers and process metadata. |
+| N-07 | Detect suspicious sequences using deterministic security rules. |
+| N-08 | Record security events, policy decisions, and enforcement outcomes. |
+| N-09 | Ensure enforcement does not depend on an external LLM. |
+| N-10 | Define safe behavior when monitoring, policy evaluation, or enforcement fails. |
+| N-11 | Minimize collection and storage of sensitive information. |
+| N-12 | Keep ML anomaly detection and eBPF integration outside the initial implementation scope. |
+
+The initial prototype focuses on enforcing filesystem and outbound network restrictions within a controlled agent environment. It does not claim universal prevention of prompt injection or content-aware detection of all data exfiltration.
